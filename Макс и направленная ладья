@@ -1,0 +1,57 @@
+from math import inf
+from collections import deque
+
+
+def BFS_shortest(G, v, dist):
+    to_process = deque()
+    to_process.append(v)
+    dist[v] = 0
+    while to_process:
+        cur = to_process.popleft()
+        for u in G[cur]:
+            if dist[u] == inf:
+                dist[u] = dist[cur] + 1
+                to_process.append(u)
+
+
+def shortest(G, v):
+    dist = [inf] * len(G)
+    BFS_shortest(G, v, dist)
+    return dist
+
+m, n = map(int, input().split())
+a = []
+for i in range(m):
+    x = input()
+    a.append([])
+    for j in range(n):
+        a[i].append(x[j])
+b = []
+c = []
+for i in range(m):
+    for j in range(n):
+        s = []
+        if a[i][j] == 'R':
+            for q in range(j + 1, n):
+                s.append(q + i * n)
+        if a[i][j] == 'L':
+            for q in range(j):
+                s.append(q + i * n)
+        if a[i][j] == 'D':
+            for q in range(i + 1, m):
+                s.append(j + q * n)
+        if a[i][j] == 'U':
+            for q in range(i):
+                s.append(j + q * n)
+        b.append(s)
+        c.append(-1)
+x1, y1 = map(int,input().split())
+x2, y2 = map(int,input().split())
+xx = y1 - 1 + (x1 - 1) * n
+yy = y2 - 1 + (x2 - 1) * n
+z = shortest(b, xx)
+zs = z[yy]
+if zs < inf:
+    print(zs)
+else:
+    print(-1)
