@@ -1,2 +1,2 @@
 # University-python-tasks
-Some my tasks
+Solves of some university tasks
