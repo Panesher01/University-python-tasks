@@ -1,0 +1,40 @@
+from math import sqrt
+
+
+n = int(input())
+lf = 10 ** 6
+dn = 10 ** 6
+rt = -(10 ** 6)
+up = -(10 ** 6)
+lfdn = 3 * (10 ** 6)
+rtdn = -3 * (10 ** 6)
+lfup = 3 * (10 ** 6)
+rtup = -3 * (10 ** 6)
+for i in range(n):
+    x, y = map(int, input().split())
+    if x + 1 > rt:
+        rt = x + 1
+    if x - 1 < lf:
+        lf = x - 1
+    if y - 1 < dn:
+        dn = y - 1
+    if y + 1 > up:
+        up = y + 1
+    if x + y + 10 ** 6 - 1 < lfdn:
+        lfdn = x + y + 10 ** 6 - 1
+    if x - y - 10 ** 6 + 1 > rtdn:
+        rtdn = x - y - 10 ** 6 + 1
+    if x + 10 ** 6 - y - 1 < lfup:
+        lfup = x + 10 ** 6 - y - 1
+    if x - 10 ** 6 + y + 1 > rtup:
+        rtup = x - 10 ** 6 + y + 1
+upln = rtup - lfup + 2 * (10 ** 6 - up)
+dnln = rtdn  -lfdn + 2 * (dn + 10 ** 6)
+rtupln = rt - rtup - 10 ** 6 + up
+lfupln = lfup - lf - 10 ** 6 + up
+rtdnln = rt - rtdn - 10 ** 6 - dn
+lfdnln = lfdn - lf - 10 ** 6 - dn
+rtln = 2 * 10 ** 6 - (2 * rt - rtdn - rtup)
+lfln = 2 * 10 ** 6 - (lfdn + lfup - 2 * lf)
+print((lfdnln + lfupln + rtdnln + rtupln) * sqrt(2) + rtln + lfln + dnln + upln)
+print(rtln + lfln + dnln + upln, '. sqrt:', lfdnln + lfupln + rtdnln + rtupln)
